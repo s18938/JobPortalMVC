@@ -1,0 +1,89 @@
+﻿@model IEnumerable<JobPortalMVC.Models.Joboffer>
+
+@{
+    ViewData["Title"] = "GetJobOffers";
+}
+
+<h1>Moje ogłoszenia</h1>
+
+<p>
+    <a asp-controller="JobOffers" asp-action="Create">Dodaj ogłoszenie</a>
+</p>
+
+@foreach (var item in Model)
+{
+    <div class="companyInfo">
+        <div class="logo"><img class="logoImg" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.EmployerEmployer.Logo))"></div>
+        <div class="name">@Html.DisplayFor(model => item.EmployerEmployer.Name)</div>
+        <div class="basicInfo">
+            <div class="empNum"><i class="fa fa-user" aria-hidden="true"></i> @Html.DisplayFor(model => item.EmployerEmployer.EmployeesNumber)</div>
+            <div class="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> @Html.DisplayFor(model => item.EmployerEmployer.Email)</div>
+            <div class="web"><i class="fa fa-globe" aria-hidden="true"></i> @Html.DisplayFor(model => item.EmployerEmployer.Page)</div>
+        </div>
+    </div>
+
+    <div class="fourBlock">
+        <div class="smallContainer">
+            <i style="color:green" class="fa fa-usd"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.SalaryMin)-@Html.DisplayFor(model => item.SalaryMax) zł</b><br>Podstawa(brutto)</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:green" class="fa fa-money"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.CommissonMin)-@Html.DisplayFor(model => item.CommissonMin) zł</b><br>Prowizja(brutto)</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkviolet" class="fa fa-briefcase"></i>
+            <label style="text-align:center"><b>
+    @foreach (var jto in item.Jobtypejoboffers)
+    {
+        @Html.DisplayFor(model => jto.JobTypeJobType.JobTypeName)
+        @*@Html.&nbsp;*@
+    }
+</b><br>Rodzaj</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkred" class="fa fa-car"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.CompanyCar)</b><br>Samochód</label>
+        </div>
+    </div>
+
+    <div class="mainInfo">
+        <h2>@Html.DisplayFor(model => item.Title)</h2>
+        <p class="text-muted">Koniec rekrutacji: @Html.DisplayFor(model => item.EndDate)</p>
+        <label>
+            @Html.DisplayFor(model => item.Content)
+        </label>
+    </div>
+
+    <div class="fourBlock">
+        <div class="smallContainer">
+            <i style="color:darkred" class="fa fa-users"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.ClientTypeClientType.ClientTypeName)</b><br>Klient</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkkhaki" class="fa fa-building"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.IndustryIndustry.IndustryName)</b><br>Branża</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkblue" class="fa fa-clock-o"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.SalesCycleLengthSalesCycleLength.SalesCycleLengthName)</b><br>Cykl sprzedarzy</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkviolet" class="fa fa-database"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.ClientDatabaseClientDatabase.ClientDatabaseName)</b><br>Baza</label>
+        </div>
+    </div>
+
+    <div class="mainInfo">
+        <h2>Lokalizacja</h2>
+        <label>
+            @Html.DisplayFor(model => item.CityCity.CityName)
+        </label>
+    </div>
+    <div style="margin-bottom:50px">
+        <a asp-controller="JobOffers" asp-action="MyCandidates" asp-route-id="@item.JobOfferId">Kandydaci</a> |
+        <a asp-controller="JobOffers" asp-action="Edit" asp-route-id="@item.JobOfferId">Edytuj</a> |
+        
+        <a asp-controller="JobOffers" asp-action="Delete" asp-route-id="@item.JobOfferId">Usuń</a>
+    </div>
+}

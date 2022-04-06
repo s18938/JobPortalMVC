@@ -1,0 +1,80 @@
+﻿@model JobPortalMVC.Models.Joboffer
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div class="companyInfo">
+    <div class="logo"><img class="logoImg" src="img/netflix.png"></div>
+    <div class="name">Microsoft</div>
+    <div class="basicInfo">
+        <div class="empNum"><i class="fa fa-user" aria-hidden="true"></i> 1000</div>
+        <div class="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> hr@microsoft.com</div>
+        <div class="web"><i class="fa fa-globe" aria-hidden="true"></i> microsoft.com</div>
+    </div>
+</div>
+
+<div class="fourBlock">
+    <div class="smallContainer">
+        <i style="color:green" class="fa fa-usd"></i>
+        <label style="text-align:center"><b>10000-20000</b><br>Podstawa(brutto)</label>
+    </div>
+    <div class="smallContainer">
+        <i style="color:green" class="fa fa-money"></i>
+        <label style="text-align:center"><b>10000-20000</b><br>Prowizja(brutto)</label>
+    </div>
+    <div class="smallContainer">
+        <i style="color:darkviolet" class="fa fa-briefcase"></i>
+        <label style="text-align:center"><b>Wyjazdowa, Zdalna, Stacjonarna</b><br>Rodzaj</label>
+    </div>
+    <div class="smallContainer">
+        <i style="color:darkred" class="fa fa-car"></i>
+        <label style="text-align:center"><b>Nie</b><br>Samochód</label>
+    </div>
+</div>
+
+<div class="mainInfo">
+    <h2>Szukamy przedstawiciela</h2>
+    <p class="text-muted">Koniec rekrutacji: 12.03.2021</p>
+    <label>
+        Poszukujemy przedstawiciela handlowego<br>
+        Wymagania:<br>
+        - znajomość CRM<br>
+        - min 3 lata doświadczenia<br>
+        Oferujemy:<br>
+        - elastyczne godziny pracy<br>
+        - dobrą kawę<br>
+    </label>
+</div>
+
+<div class="fourBlock">
+    <div class="smallContainer">
+        <i style="color:darkred" class="fa fa-users"></i>
+        <label style="text-align:center"><b>B2B</b><br>Klient</label>
+    </div>
+    <div class="smallContainer">
+        <i style="color:darkkhaki" class="fa fa-building"></i>
+        <label style="text-align:center"><b>Hotelarska</b><br>Branża</label>
+    </div>
+    <div class="smallContainer">
+        <i style="color:darkblue" class="fa fa-clock-o"></i>
+        <label style="text-align:center"><b>1-2 mies.</b><br>Cykl sprzedarzy</label>
+    </div>
+    <div class="smallContainer">
+        <i style="color:darkviolet" class="fa fa-database"></i>
+        <label style="text-align:center"><b>Częściowa</b><br>Baza</label>
+    </div>
+</div>
+
+<div class="mainInfo">
+    <h2>Lokalizacje</h2>
+    <label>
+        Warszawa<br>
+        Kraków<br>
+        Gdańsk<br>
+    </label>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.JobOfferId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

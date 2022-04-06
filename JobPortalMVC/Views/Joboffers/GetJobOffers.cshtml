@@ -1,0 +1,87 @@
+﻿@model JobPortalMVC.Models.Candidate
+
+@{
+    ViewData["Title"] = "GetJobOffers";
+}
+
+<h1>Moje aplikacje</h1>
+
+@foreach (var item in Model.Joboffercandidates)
+{
+    <div class="companyInfo">
+        <div class="logo"><img class="logoImg" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.JobOfferJobOffer.EmployerEmployer.Logo))"></div>
+        <div class="name">@Html.DisplayFor(model => item.JobOfferJobOffer.EmployerEmployer.Name)</div>
+        <div class="basicInfo">
+            <div class="empNum"><i class="fa fa-user" aria-hidden="true"></i> @Html.DisplayFor(model => item.JobOfferJobOffer.EmployerEmployer.EmployeesNumber)</div>
+            <div class="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> @Html.DisplayFor(model => item.JobOfferJobOffer.EmployerEmployer.Email)</div>
+            <div class="web"><i class="fa fa-globe" aria-hidden="true"></i> @Html.DisplayFor(model => item.JobOfferJobOffer.EmployerEmployer.Page)</div>
+        </div>
+    </div>
+
+    <div class="fourBlock">
+        <div class="smallContainer">
+            <i style="color:green" class="fa fa-usd"></i>
+            <label style="text-align:center"><b>
+                @Html.DisplayFor(model => item.JobOfferJobOffer.SalaryMin)-@Html.DisplayFor(model => item.JobOfferJobOffer.SalaryMax) zł</b><br>Podstawa(brutto)</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:green" class="fa fa-money"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.JobOfferJobOffer.CommissonMin)-@Html.DisplayFor(model => item.JobOfferJobOffer.CommissonMin) zł</b><br>Prowizja(brutto)</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkviolet" class="fa fa-briefcase"></i>
+            <label style="text-align:center"><b>
+    @foreach (var jto in item.JobOfferJobOffer.Jobtypejoboffers)
+    {
+        @Html.DisplayFor(model => jto.JobTypeJobType.JobTypeName)
+        @*@Html.&nbsp;*@
+    }
+</b><br>Rodzaj</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkred" class="fa fa-car"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.JobOfferJobOffer.CompanyCar)</b><br>Samochód</label>
+        </div>
+    </div>
+
+    <div class="mainInfo">
+        <h2>@Html.DisplayFor(model => item.JobOfferJobOffer.Title)</h2>
+        <p class="text-muted">Koniec rekrutacji: @Html.DisplayFor(model => item.JobOfferJobOffer.EndDate)</p>
+        <label>
+            @Html.DisplayFor(model => item.JobOfferJobOffer.Content)
+        </label>
+    </div>
+
+    <div class="fourBlock">
+        <div class="smallContainer">
+            <i style="color:darkred" class="fa fa-users"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.JobOfferJobOffer.ClientTypeClientType.ClientTypeName)</b><br>Klient</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkkhaki" class="fa fa-building"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.JobOfferJobOffer.IndustryIndustry.IndustryName)</b><br>Branża</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkblue" class="fa fa-clock-o"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.JobOfferJobOffer.SalesCycleLengthSalesCycleLength.SalesCycleLengthName)</b><br>Cykl sprzedarzy</label>
+        </div>
+        <div class="smallContainer">
+            <i style="color:darkviolet" class="fa fa-database"></i>
+            <label style="text-align:center"><b>@Html.DisplayFor(model => item.JobOfferJobOffer.ClientDatabaseClientDatabase.ClientDatabaseName)</b><br>Baza</label>
+        </div>
+    </div>
+
+    <div class="mainInfo">
+        <h2> @Html.DisplayFor(model => item.JobOfferJobOffer.CityCity.CityName)</h2>
+        <label>
+            Lokalizacja
+        </label>
+    </div>
+    <div class="mainInfo" style="margin-bottom:50px">
+        <h2> @Html.DisplayFor(model => item.JobApliacationStateJobApliacationState.Name)</h2>
+        <label>
+            Status aplikacji         
+        </label>
+    </div>
+}
+

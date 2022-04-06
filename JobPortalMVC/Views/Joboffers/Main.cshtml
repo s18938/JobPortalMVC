@@ -1,0 +1,47 @@
+﻿@model IEnumerable<JobPortalMVC.Models.Joboffer>
+
+@{
+    ViewData["Title"] = "Main";
+}
+<div>
+    <div class="btns-conteiner">
+        <button  class="btn btn-primary" ><i class="fa fa-filter"></i> Filtruj</button>
+        @*<button  class="btn btn-primary"><i class="fa fa-plus"></i> Dodaj</button>*@
+    </div>
+    <div>       
+        <ul class="main-ul">
+            @foreach (var item in Model)
+            {
+                <li>            
+                    <div class="listElement">
+
+                        <div class="logo">
+                            <a type="button" class="detailsBtn" asp-controller="JobOffers" asp-action="Details" asp-route-id="@item.JobOfferId">
+                                <img class="logoImg" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.EmployerEmployer.Logo))">
+                            </a>
+                        </div>
+
+                        <div class="title">@Html.DisplayFor(modelItem => item.Title)</div>
+                        <div class="salary">            
+                            @((item.SalaryMin != null & item.SalaryMax != null)? (item.SalaryMin+" - " + item.SalaryMax + " zł") : "Nie podano")
+                            @*@Html.DisplayFor(modelItem => item.SalaryMin) - @Html.DisplayFor(modelItem => item.SalaryMax) zł*@
+                        </div>
+
+                        <div class="job-details-btn">
+                            <a type="button"  class="btn btn-light" asp-controller="JobOffers" asp-action="Details" asp-route-id="@item.JobOfferId">
+                               Szczegóły
+                            </a>
+                        </div>
+
+                        <div class="companyName"><i class="fa fa-university"></i> @Html.DisplayFor(modelItem => item.EmployerEmployer.Name)</div>
+                        <div class="location"><i class="fa fa-map-marker"></i> @Html.DisplayFor(modelItem => item.CityCity.CityName)</div>
+                        <div class="industry"><i class="fa fa-building"></i> @Html.DisplayFor(modelItem => item.IndustryIndustry.IndustryName)</div>
+                        <div class="clientType"><i class="fa fa-users"></i> @Html.DisplayFor(modelItem => item.ClientTypeClientType.ClientTypeName)</div>
+                        <div class="position"></div>
+                        <div></div>
+                    </div>                   
+                </li>
+            }
+        </ul>
+    </div>
+</div>

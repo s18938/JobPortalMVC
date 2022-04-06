@@ -1,0 +1,75 @@
+﻿@model IEnumerable<JobPortalMVC.Models.Joboffercandidate>
+
+@{
+    ViewData["Title"] = "MyCandidates";
+}
+
+<h1>Kandydaci na ogłoszenie: @Model.FirstOrDefault().JobOfferJobOffer.Title @Model.FirstOrDefault().JobOfferJobOffer.StartDate.ToString("dd.MM.yyyy") - @Model.FirstOrDefault().JobOfferJobOffer.EndDate.ToString("dd.MM.yyyy")</h1>
+<a  asp-area="" asp-controller="Employers" asp-action="GetJobOffers" asp-route-id="2">Powrót</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Data aplikacji
+            </th>
+            <th>
+                Imie
+            </th>
+            <th>
+                Nazwisko
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Tel
+            </th>
+            <th>
+                Adres
+            </th>
+            <th>
+                Status
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.AddDate.ToString("dd.MM.yyyy")
+                    @*@Html.DisplayFor(modelItem => item.AddDate.ToString("dd-MM-yyyy"))*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateCandidate.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateCandidate.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateCandidate.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateCandidate.TelNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateCandidate.CityCity.CityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobApliacationStateJobApliacationState.Name)
+                </td>
+
+                <td>
+                    <a type="button" class="btn btn-light" asp-controller="Experiences" asp-action="GetDetailsByCandidate" asp-route-id="@item.CandidateCandidate.CandidateId">
+                        Doświadczenie kandydata
+                    </a>
+                    <a type="button" class="btn btn-light" asp-controller="Joboffercandidates" asp-action="EditState" asp-route-id="@item.JobOfferCandidateId">
+                        Zmień status
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,118 @@
+﻿@model JobPortalMVC.Models.Joboffer
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usuń</h1>
+
+<h3>Czy na pewno chcesz usunąć?</h3>
+<div>
+    <h4>Ogłoszenie o pracę</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Tytuł
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Treść
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            Pensja max
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SalaryMax)
+        </dd>
+        <dt class="col-sm-2">
+            Pensja min
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SalaryMin)
+        </dd>
+        <dt class="col-sm-2">
+            Premia min
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CommissonMin)
+        </dd>
+        <dt class="col-sm-2">
+            Premia max
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CommissonMax)
+        </dd>
+
+        <dt class="col-sm-2">
+           Samochód
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompanyCar)
+        </dd>
+        <dt class="col-sm-2">
+            Data rozpoczęcia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            Data zakończenia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+           MIasto
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CityCity.CityName)
+        </dd>
+        <dt class="col-sm-2">
+           Baza klientów
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClientDatabaseClientDatabase.ClientDatabaseName)
+        </dd>
+        <dt class="col-sm-2">
+            Typ klienta
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClientTypeClientType.ClientTypeName)
+        </dd>
+        <dt class="col-sm-2">
+            Pracodawca
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmployerEmployer.Email)
+        </dd>
+        <dt class="col-sm-2">
+           Branża
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IndustryIndustry.IndustryName)
+        </dd>
+        <dt class="col-sm-2">
+           Stanowisko
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PositionPosition.PositionName)
+        </dd>
+        <dt class="col-sm-2">
+           Dł. cyklu sprzedaży
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SalesCycleLengthSalesCycleLength.SalesCycleLengthName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="JobOfferId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-controller="Employers" asp-action="GetJobOffers" asp-route-id="2">Powrót</a>
+    </form>
+</div>

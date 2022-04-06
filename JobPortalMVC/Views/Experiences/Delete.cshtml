@@ -1,0 +1,75 @@
+﻿@model JobPortalMVC.Models.Experience
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usuń</h1>
+
+<h3>Czy na pewno chcesz usunąć?</h3>
+<div>
+    <h4>Doświadczenie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Firma
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+        <dt class = "col-sm-2">
+           Data rozpoczęcia
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+           Data zakończenia
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class = "col-sm-2">
+           Email kandydata
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CandidateCandidate.Email)
+        </dd class>
+        <dt class = "col-sm-2">
+            Baza klientów
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClientDatabaseClientDatabase.ClientDatabaseName)
+        </dd class>
+        <dt class = "col-sm-2">
+           Typ kilenta
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClientTypeClientType.ClientTypeName)
+        </dd class>
+        <dt class = "col-sm-2">
+           Branża
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IndustryIndustry.IndustryName)
+        </dd class>
+        <dt class = "col-sm-2">
+           Stanowisko
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PositionPosition.PositionName)
+        </dd class>
+        <dt class = "col-sm-2">
+            Dł. cyklu sprzedaży
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SalesCycleLengthSalesCycleLength.SalesCycleLengthName)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ExperienceId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="GetDetailsByCandidate" asp-route-id="@Model.CandidateCandidateId">Wróć</a>
+    </form>
+</div>

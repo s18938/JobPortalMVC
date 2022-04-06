@@ -1,0 +1,84 @@
+﻿@*@model IEnumerable<JobPortalMVC.Models.Candidate>*@
+@model JobPortalMVC.Models.Candidate
+
+@{
+    ViewData["Title"] = "GetDetailsByCandidate";
+}
+
+<h1>Moje doświadczenie</h1>
+
+<p>
+    <a asp-action="Create" asp-route-id="@Model.CandidateId">Dodaj doświadczenie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Firma
+            </th>
+            <th>
+                Data rozpoczęcia
+            </th>
+            <th>
+                Data zakończenia
+            </th>
+            <th>
+                Dł. zatrudnienia
+            </th>
+            <th>
+               Baza klientów
+            </th>
+            <th>
+                Rodzaj klienta
+            </th>
+            <th>
+                Branża
+            </th>
+            <th>
+                Stanowisko
+            </th>
+            <th>
+                Dł. cyklu sprzedażowego
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Experiences)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                   @*@{item.EndDate.Value.Year - @item.StartDate.Value.Year}*@ 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientDatabaseClientDatabase.ClientDatabaseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientTypeClientType.ClientTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IndustryIndustry.IndustryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PositionPosition.PositionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesCycleLengthSalesCycleLength.SalesCycleLengthName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ExperienceId">Edytuj</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ExperienceId">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

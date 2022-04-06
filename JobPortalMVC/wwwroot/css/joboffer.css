@@ -1,0 +1,90 @@
+﻿.companyInfo {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas: "logo  name name name" "logo  basicInfo basicInfo basicInfo";
+    height: 120px;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .2);
+}
+
+.basicInfo {
+    grid-area: basicInfo;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    grid-area: logo;
+    margin: auto;
+}
+
+.logoImg {
+    margin: auto;
+    max-height: 90px;
+    width: 70%;
+}
+
+.name {
+    grid-area: name;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.empNum,
+.email,
+.web {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.fourBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.smallContainer {
+    width: 24%;
+    height: 120px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .2);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mainInfo {
+    background-color: white;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .2);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}

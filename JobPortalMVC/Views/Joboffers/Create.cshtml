@@ -1,0 +1,99 @@
+﻿@model JobPortalMVC.Models.Joboffer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Utwórz</h1>
+
+<h4>Ogłoszenie o pracę</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Tytuł</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label">Treść</label>
+                <textarea style="height:500px" asp-for="Content" class="form-control" /></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaryMax" class="control-label">Pensja max</label>
+                <input asp-for="SalaryMax" class="form-control" />
+                <span asp-validation-for="SalaryMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaryMin" class="control-label">Pensja min</label>
+                <input asp-for="SalaryMin" class="form-control" />
+                <span asp-validation-for="SalaryMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommissonMin" class="control-label">Premia min</label>
+                <input asp-for="CommissonMin" class="form-control" />
+                <span asp-validation-for="CommissonMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommissonMax" class="control-label">Premia max</label>
+                <input asp-for="CommissonMax" class="form-control" />
+                <span asp-validation-for="CommissonMax" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+
+                    <input class="form-check-input" asp-for="CompanyCar" /> Samochód firmowy
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployerEmployerId" class="control-label">Pracodawca</label>
+                <select asp-for="EmployerEmployerId" class="form-control" asp-items="ViewBag.EmployerEmployerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientDatabaseClientDatabaseId" class="control-label">Baza leadów</label>
+                <select asp-for="ClientDatabaseClientDatabaseId" class="form-control" asp-items="ViewBag.ClientDatabaseClientDatabaseId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IndustryIndustryId" class="control-label">Branża</label>
+                <select asp-for="IndustryIndustryId" class="form-control" asp-items="ViewBag.IndustryIndustryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientTypeClientTypeId" class="control-label">Typ klienta</label>
+                <select asp-for="ClientTypeClientTypeId" class="form-control" asp-items="ViewBag.ClientTypeClientTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PositionPositionId" class="control-label">Stanowisko</label>
+                <select asp-for="PositionPositionId" class="form-control" asp-items="ViewBag.PositionPositionId"></select>
+            </div>
+            <div hidden class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label">Data zakończenia rekrutacji</label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesCycleLengthSalesCycleLengthId" class="control-label">Dł. cyklu sprzedażowego</label>
+                <select asp-for="SalesCycleLengthSalesCycleLengthId" class="form-control" asp-items="ViewBag.SalesCycleLengthSalesCycleLengthId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityCityId" class="control-label">Miasto</label>
+                <select asp-for="CityCityId" class="form-control" asp-items="ViewBag.CityCityId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

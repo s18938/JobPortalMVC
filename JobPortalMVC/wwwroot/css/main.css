@@ -1,0 +1,94 @@
+﻿.listElement {
+    height: 110px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr 0.7fr 1fr 1fr 1fr;
+    grid-template-rows: 1.5fr 1fr;
+    grid-template-areas: "logo title title title salary salary" "logo companyName location industry clientType position";
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .2);
+    clear: both;
+}
+
+.title {
+    grid-area: title;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: large;
+    font-weight: bold;
+}
+
+.salary {
+    grid-area: salary;
+    text-align: right;
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 500;
+}
+
+.companyName,
+.location,
+.industry,
+.clientType,
+.position {
+    text-align: center;
+    color: gray;
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.companyName {
+    grid-area: companyName;
+}
+
+.location {
+    grid-area: location;
+}
+
+.industry {
+    grid-area: industry;
+}
+
+.clientType {
+    grid-area: clientType;
+}
+
+.position {
+    grid-area: position;
+}
+
+.rightPanel {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    grid-area: logo;
+    margin: auto;
+    padding-right: 5px;
+}
+
+.logoImg {
+    margin: auto;
+    max-height: 90px;
+    width: 70%;
+}
+
+.btns-conteiner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
