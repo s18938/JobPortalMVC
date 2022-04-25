@@ -162,5 +162,53 @@ namespace JobPortalMVC.Controllers
         {
             return _context.Candidates.Any(e => e.CandidateId == id);
         }
+
+
+        // GET: Candidates/GetJobOffers/5
+        public async Task<IActionResult> GetJobOffers(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var salesjobportalContext = _context.Candidates.
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.CityCity).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.ClientDatabaseClientDatabase).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.ClientTypeClientType).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.EmployerEmployer).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.IndustryIndustry).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.PositionPosition).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.SalesCycleLengthSalesCycleLength).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.Jobtypejoboffers).ThenInclude(j => j.JobTypeJobType).
+                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobApliacationStateJobApliacationState)
+                .FirstOrDefaultAsync(m => m.CandidateId == id);
+
+            return View(await salesjobportalContext);
+        }
+
+        // GET: Candidates/GetExperiences/5
+        public async Task<IActionResult> GetExperiences(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var experience = await _context.Candidates
+                .Include(e => e.Experiences).ThenInclude(e => e.ClientDatabaseClientDatabase)
+                .Include(e => e.Experiences).ThenInclude(e => e.ClientTypeClientType)
+                .Include(e => e.Experiences).ThenInclude(e => e.IndustryIndustry)
+                .Include(e => e.Experiences).ThenInclude(e => e.PositionPosition)
+                .Include(e => e.Experiences).ThenInclude(e => e.SalesCycleLengthSalesCycleLength)
+                .FirstOrDefaultAsync(m => m.CandidateId == id);
+            if (experience == null)
+            {
+                return NotFound();
+            }
+
+            return View(experience);
+        }
     }
 }
+

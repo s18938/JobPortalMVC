@@ -30,7 +30,7 @@ namespace JobPortalMVC.Controllers
         // GET: View
         public async Task<IActionResult> Main()
         {
-            var salesjobportalContext = _context.Joboffers.Include(j => j.CityCity).Include(j => j.ClientDatabaseClientDatabase).Include(j => j.ClientTypeClientType).Include(j => j.EmployerEmployer).Include(j => j.IndustryIndustry).Include(j => j.PositionPosition).Include(j => j.SalesCycleLengthSalesCycleLength);
+            var salesjobportalContext = _context.Joboffers.Include(j => j.CityCity).Include(j => j.ClientDatabaseClientDatabase).Include(j => j.ClientTypeClientType).Include(j => j.EmployerEmployer).Include(j => j.IndustryIndustry).Include(j => j.PositionPosition).Include(j => j.SalesCycleLengthSalesCycleLength).OrderBy(j=>j.StartDate);
             return View(await salesjobportalContext.ToListAsync());
         }
 
@@ -68,8 +68,8 @@ namespace JobPortalMVC.Controllers
 
 
 
-        // GET: Joboffers/Details/5
-        public async Task<IActionResult> MyCandidates(int? id)
+        // GET: Joboffers/GetCandidates/5
+        public async Task<IActionResult> GetCandidates(int? id)
         {
             if (id == null)
             {
@@ -95,29 +95,6 @@ namespace JobPortalMVC.Controllers
             return View(joboffer.Joboffercandidates);
         }
 
-        
-        public async Task<IActionResult> GetJobOffers(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-           
-            var salesjobportalContext = _context.Candidates.
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.CityCity).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.ClientDatabaseClientDatabase).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.ClientTypeClientType).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.EmployerEmployer).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.IndustryIndustry).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.PositionPosition).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.SalesCycleLengthSalesCycleLength).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobOfferJobOffer).ThenInclude(j => j.Jobtypejoboffers).ThenInclude(j=>j.JobTypeJobType).
-                Include(c => c.Joboffercandidates).ThenInclude(j => j.JobApliacationStateJobApliacationState)
-                .FirstOrDefaultAsync(m => m.CandidateId == id);
-
-            return View(await salesjobportalContext);
-        }
-
         // GET: Joboffers/Create
         public IActionResult Create()
         {
@@ -129,21 +106,6 @@ namespace JobPortalMVC.Controllers
             ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName");
             ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName");
            
-            return View();
-        }
-
-        // GET: Joboffers/Test
-        public IActionResult Test()
-        {
-            ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName");
-            ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName");
-            ViewData["ClientTypeClientTypeId"] = new SelectList(_context.Clienttypes, "ClientTypeId", "ClientTypeName");
-            ViewData["EmployerEmployerId"] = new SelectList(_context.Employers, "EmployerId", "Email");
-            ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName");
-            ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName");
-            ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName");
-            ViewData["JobTypeId"] = new SelectList(_context.Jobtypes, "JobTypeId", "JobTypeName");
-
             return View();
         }
 
@@ -282,7 +244,7 @@ namespace JobPortalMVC.Controllers
                 .Include(j => j.IndustryIndustry)
                 .Include(j => j.PositionPosition)
                 .Include(j => j.SalesCycleLengthSalesCycleLength)
-                
+               
                 .FirstOrDefaultAsync(m => m.JobOfferId == id);
             if (joboffer == null)
             {
@@ -296,16 +258,17 @@ namespace JobPortalMVC.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+        {      
             var joboffer = await _context.Joboffers
                 .Include(j => j.Joboffercandidates)
                 .Include(j => j.Jobtypejoboffers)                
                 .FirstOrDefaultAsync(m => m.JobOfferId == id);
-            //.FindAsync(id);
+
+            _context.Joboffercandidates.RemoveRange(joboffer.Joboffercandidates.ToList());
+            _context.Jobtypejoboffers.RemoveRange(joboffer.Jobtypejoboffers.ToList());
             _context.Joboffers.Remove(joboffer);
             await _context.SaveChangesAsync();
-            return RedirectToAction("GetJobOffers", "Employers", new { id = joboffer.EmployerEmployerId });
-          // return RedirectToAction(nameof(Index));
+            return RedirectToAction("GetJobOffers", "Employers", new { id = joboffer.EmployerEmployerId });         
         }
 
         private bool JobofferExists(int id)

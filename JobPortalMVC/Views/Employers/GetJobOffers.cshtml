@@ -36,8 +36,9 @@
             <label style="text-align:center"><b>
     @foreach (var jto in item.Jobtypejoboffers)
     {
-        @Html.DisplayFor(model => jto.JobTypeJobType.JobTypeName)
+        @*@Html.DisplayFor(model => jto.JobTypeJobType.JobTypeName)*@
         @*@Html.&nbsp;*@
+        @(jto.JobTypeJobType.JobTypeName.ToString() + " ")
     }
 </b><br>Rodzaj</label>
         </div>
@@ -81,7 +82,7 @@
         </label>
     </div>
     <div style="margin-bottom:50px">
-        <a asp-controller="JobOffers" asp-action="MyCandidates" asp-route-id="@item.JobOfferId">Kandydaci</a> |
+        <a asp-controller="JobOffers" asp-action="GetCandidates" asp-route-id="@item.JobOfferId">Kandydaci</a> |
         <a asp-controller="JobOffers" asp-action="Edit" asp-route-id="@item.JobOfferId">Edytuj</a> |
         
         <a asp-controller="JobOffers" asp-action="Delete" asp-route-id="@item.JobOfferId">Usuń</a>

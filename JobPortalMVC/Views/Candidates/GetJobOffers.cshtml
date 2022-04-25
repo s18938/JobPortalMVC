@@ -33,7 +33,8 @@
             <label style="text-align:center"><b>
     @foreach (var jto in item.JobOfferJobOffer.Jobtypejoboffers)
     {
-        @Html.DisplayFor(model => jto.JobTypeJobType.JobTypeName)
+        @*@Html.DisplayFor(model => jto.JobTypeJobType.JobTypeName)*@
+        @(jto.JobTypeJobType.JobTypeName.ToString() + " ")
         @*@Html.&nbsp;*@
     }
 </b><br>Rodzaj</label>

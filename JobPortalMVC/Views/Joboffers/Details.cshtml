@@ -1,6 +1,4 @@
 ﻿@model JobPortalMVC.Models.Joboffer
-@*@using MultipleModelInOneView;
-@model dynamic*@
 
 @{
     ViewData["Title"] = "Details";
@@ -34,9 +32,8 @@
         <label style="text-align:center">
             <b>
                 @foreach (var item in Model.Jobtypejoboffers)
-                {
-                    @Html.DisplayFor(model => item.JobTypeJobType.JobTypeName)
-                    @*@Html.&nbsp;*@
+                {              
+                    @(item.JobTypeJobType.JobTypeName.ToString() + " ")
                 }
 
             </b><br>Rodzaj

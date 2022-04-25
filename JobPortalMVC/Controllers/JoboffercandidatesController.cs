@@ -186,8 +186,8 @@ namespace JobPortalMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("MyCandidates", "JobOffers", new { id = joboffercandidate.JobOfferJobOfferId });
-               // return RedirectToAction(nameof(Index));
+                return RedirectToAction("GetCandidates", "JobOffers", new { id = joboffercandidate.JobOfferJobOfferId });
+               
             }
             ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", joboffercandidate.CandidateCandidateId);
             ViewData["JobApliacationStateJobApliacationStateId"] = new SelectList(_context.Jobapliacationstates, "JobApliacationStateId", "Name", joboffercandidate.JobApliacationStateJobApliacationStateId);

@@ -3,16 +3,29 @@
 @{
     ViewData["Title"] = "Main";
 }
+@*<script>
+    var ShowFilterDialog = false;
+    $(function () {
+        GetStudents();
+    });
+    function GetStudents() {
+        
+    }
+</script>*@
+
+@{ 
+    var ShowFilterDialog = false;
+}
 <div>
     <div class="btns-conteiner">
-        <button  class="btn btn-primary" ><i class="fa fa-filter"></i> Filtruj</button>
+        <button onclick="@ShowFilterDialog=true" class="btn btn-primary"><i class="fa fa-filter"></i> Filtruj</button>
         @*<button  class="btn btn-primary"><i class="fa fa-plus"></i> Dodaj</button>*@
     </div>
-    <div>       
+    <div>
         <ul class="main-ul">
             @foreach (var item in Model)
             {
-                <li>            
+                <li>
                     <div class="listElement">
 
                         <div class="logo">
@@ -22,14 +35,14 @@
                         </div>
 
                         <div class="title">@Html.DisplayFor(modelItem => item.Title)</div>
-                        <div class="salary">            
+                        <div class="salary">
                             @((item.SalaryMin != null & item.SalaryMax != null)? (item.SalaryMin+" - " + item.SalaryMax + " zł") : "Nie podano")
                             @*@Html.DisplayFor(modelItem => item.SalaryMin) - @Html.DisplayFor(modelItem => item.SalaryMax) zł*@
                         </div>
 
                         <div class="job-details-btn">
-                            <a type="button"  class="btn btn-light" asp-controller="JobOffers" asp-action="Details" asp-route-id="@item.JobOfferId">
-                               Szczegóły
+                            <a type="button" class="btn btn-light" asp-controller="JobOffers" asp-action="Details" asp-route-id="@item.JobOfferId">
+                                Szczegóły
                             </a>
                         </div>
 
@@ -39,9 +52,212 @@
                         <div class="clientType"><i class="fa fa-users"></i> @Html.DisplayFor(modelItem => item.ClientTypeClientType.ClientTypeName)</div>
                         <div class="position"></div>
                         <div></div>
-                    </div>                   
+                    </div>
                 </li>
             }
         </ul>
+
+        @if (ShowFilterDialog)
+        {
+            <div style="background-color:rgba(0, 0, 0, 0.5);" class="modal show d-block" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Filtruj ogłoszenia</h5>
+                            <button onclick="@ShowFilterDialog=false" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label class="form-label">Podstawa + Prowizja</label>
+                                <input style="margin-bottom:10px" class="form-control" type="number" name="salComMin" placeholder="min">
+                                <input class="form-control" type="number" name="salComMax" placeholder="max">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Podstawa</label>
+                                <input style="margin-bottom:10px" class="form-control" type="number" name="salaryMin" placeholder="min">
+                                <input class="form-control" type="number" name="salaryMax" placeholder="max">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Premia</label>
+                                <input style="margin-bottom:10px" class="form-control" type="number" name="commissonMin" placeholder="min">
+                                <input class="form-control" type="number" name="commissonMax" placeholder="max">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Rodzaj pracy</label>
+                                <div class="list-group">
+
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Tak
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Nie
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Częściowo
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Nie dotyczy
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Branża</label>
+                                <div class="list-group">
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        IT
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        FMCG
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Produkcja
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Moto
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Finanse
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        TLS
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Energetyczna
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Inne
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Klient</label>
+                                <div class="list-group">
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        B2B
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        B2C
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Długość procesu sprzedaży</label>
+                                <div class="list-group">
+
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        &lt; 1mies.
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        1-3 mies.
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        3-6 mies.
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        6-12 mies.
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        &gt; 1 rok
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Stanowisko</label>
+                                <div class="list-group">
+
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Przedstawiciel
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Dyrektor sprzedaży
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Kierownik sprzedaży
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Specjalista ds. sprzedaży
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Doradca/Obsługa klienta
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Rodzaj pracy</label>
+                                <div class="list-group">
+
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Stacjonarna
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Wyjazdowa
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Zdalna
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Samochód firmowy</label>
+                                <div class="list-group">
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Tak
+                                    </label>
+                                    <label class="list-group-item">
+                                        <input class="form-label" type="checkbox" value="">
+                                        Nie
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button onclick="@ShowFilterDialog=false" type="button" class="btn btn-light" data-dismiss="modal">Zamknij</button>
+                            <button onclick="@ShowFilterDialog=false" type="button" class="btn btn-primary">Filtruj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
+

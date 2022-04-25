@@ -18,60 +18,7 @@ namespace JobPortalMVC.Controllers
             _context = context;
         }
 
-        // GET: Experiences
-        //public async Task<IActionResult> Index()
-        //{
-        //    var salesjobportalContext = _context.Experiences.Include(e => e.CandidateCandidate).Include(e => e.ClientDatabaseClientDatabase).Include(e => e.ClientTypeClientType).Include(e => e.IndustryIndustry).Include(e => e.PositionPosition).Include(e => e.SalesCycleLengthSalesCycleLength);
-        //    return View(await salesjobportalContext.ToListAsync());
-        //}
-
-        //// GET: Experiences/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var experience = await _context.Experiences
-        //        .Include(e => e.CandidateCandidate)
-        //        .Include(e => e.ClientDatabaseClientDatabase)
-        //        .Include(e => e.ClientTypeClientType)
-        //        .Include(e => e.IndustryIndustry)
-        //        .Include(e => e.PositionPosition)
-        //        .Include(e => e.SalesCycleLengthSalesCycleLength)
-        //        .FirstOrDefaultAsync(m => m.ExperienceId == id);
-        //    if (experience == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(experience);
-        //}
-
-        // GET: Experiences/Details/5
-        public async Task<IActionResult> GetDetailsByCandidate(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var experience = await _context.Candidates
-                .Include(e=>e.Experiences).ThenInclude(e => e.ClientDatabaseClientDatabase)
-                .Include(e => e.Experiences).ThenInclude(e => e.ClientTypeClientType)
-                .Include(e => e.Experiences).ThenInclude(e => e.IndustryIndustry)
-                .Include(e => e.Experiences).ThenInclude(e => e.PositionPosition)
-                .Include(e => e.Experiences).ThenInclude(e => e.SalesCycleLengthSalesCycleLength)
-                .FirstOrDefaultAsync(m => m.CandidateId == id);
-            if (experience == null)
-            {
-                return NotFound();
-            }
-
-            return View(experience);
-        }
-
+       
         // GET: Experiences/Create
         public IActionResult Create(int? id)
         {
@@ -97,8 +44,8 @@ namespace JobPortalMVC.Controllers
                 experience.CandidateCandidateId = 2;
                 _context.Add(experience);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("GetDetailsByCandidate", "Experiences", new { id = experience.CandidateCandidateId });
-               // return RedirectToAction(nameof(Index));
+                return RedirectToAction("GetExperiences", "Candidates", new { id = experience.CandidateCandidateId });
+            
             }
             ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", experience.CandidateCandidateId);
             ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", experience.ClientDatabaseClientDatabaseId);
@@ -162,8 +109,8 @@ namespace JobPortalMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("GetDetailsByCandidate", "Experiences", new { id = experience.CandidateCandidateId });
-               // return RedirectToAction(nameof(Index));
+                return RedirectToAction("GetExperiences", "Candidates", new { id = experience.CandidateCandidateId });
+                // return RedirectToAction(nameof(Index));
             }
            // ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", experience.CandidateCandidateId);
             ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", experience.ClientDatabaseClientDatabaseId);
@@ -206,8 +153,8 @@ namespace JobPortalMVC.Controllers
             var experience = await _context.Experiences.FindAsync(id);
             _context.Experiences.Remove(experience);
             await _context.SaveChangesAsync();
-            return RedirectToAction("GetDetailsByCandidate", "Experiences", new { id = experience.CandidateCandidateId });
-          //  return RedirectToAction(nameof(Index));
+            return RedirectToAction("GetExperiences", "Candidates", new { id = experience.CandidateCandidateId });
+           
         }
 
         private bool ExperienceExists(int id)

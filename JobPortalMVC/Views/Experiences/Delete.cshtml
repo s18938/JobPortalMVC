@@ -70,6 +70,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ExperienceId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="GetDetailsByCandidate" asp-route-id="@Model.CandidateCandidateId">Wróć</a>
+        <a  asp-controller="Candidates" asp-action="GetExperiences"  asp-route-id="@Model.CandidateCandidateId">Wróć</a>
     </form>
 </div>

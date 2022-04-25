@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<JobPortalMVC.Models.Joboffercandidate>
 
 @{
-    ViewData["Title"] = "MyCandidates";
+    ViewData["Title"] = "GetCandidates";
 }
 
 <h1>Kandydaci na ogłoszenie: @Model.FirstOrDefault().JobOfferJobOffer.Title @Model.FirstOrDefault().JobOfferJobOffer.StartDate.ToString("dd.MM.yyyy") - @Model.FirstOrDefault().JobOfferJobOffer.EndDate.ToString("dd.MM.yyyy")</h1>
@@ -62,7 +62,7 @@
                 </td>
 
                 <td>
-                    <a type="button" class="btn btn-light" asp-controller="Experiences" asp-action="GetDetailsByCandidate" asp-route-id="@item.CandidateCandidate.CandidateId">
+                    <a type="button" class="btn btn-light" asp-controller="Candidates" asp-action="GetExperiences" asp-route-id="@item.CandidateCandidate.CandidateId">
                         Doświadczenie kandydata
                     </a>
                     <a type="button" class="btn btn-light" asp-controller="Joboffercandidates" asp-action="EditState" asp-route-id="@item.JobOfferCandidateId">

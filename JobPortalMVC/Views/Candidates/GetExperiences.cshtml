@@ -1,14 +1,13 @@
-﻿@*@model IEnumerable<JobPortalMVC.Models.Candidate>*@
-@model JobPortalMVC.Models.Candidate
+﻿@model JobPortalMVC.Models.Candidate
 
 @{
-    ViewData["Title"] = "GetDetailsByCandidate";
+    ViewData["Title"] = "GetExperiences";
 }
 
 <h1>Moje doświadczenie</h1>
 
 <p>
-    <a asp-action="Create" asp-route-id="@Model.CandidateId">Dodaj doświadczenie</a>
+    <a asp-controller="Experiences" asp-action="Create" asp-route-id="@Model.CandidateId">Dodaj doświadczenie</a>
 </p>
 <table class="table">
     <thead>
@@ -75,8 +74,8 @@
                     @Html.DisplayFor(modelItem => item.SalesCycleLengthSalesCycleLength.SalesCycleLengthName)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ExperienceId">Edytuj</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ExperienceId">Usuń</a>
+                    <a asp-controller="Experiences" asp-action="Edit" asp-route-id="@item.ExperienceId">Edytuj</a> |
+                    <a asp-controller="Experiences" asp-action="Delete" asp-route-id="@item.ExperienceId">Usuń</a>
                 </td>
             </tr>
         }
