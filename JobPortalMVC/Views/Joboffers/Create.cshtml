@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label">Treść</label>
-                <textarea style="height:500px" asp-for="Content" class="form-control" /></textarea>
+                <textarea style="height:500px" asp-for="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,6 +68,10 @@
             <div class="form-group">
                 <label asp-for="PositionPositionId" class="control-label">Stanowisko</label>
                 <select asp-for="PositionPositionId" class="form-control" asp-items="ViewBag.PositionPositionId"></select>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Rodzaj pracy</label>
+                <select  class="form-control" asp-items="ViewBag.JobTypeJobTypeId" ></select>
             </div>
             <div hidden class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>

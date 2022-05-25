@@ -109,8 +109,7 @@ namespace JobPortalMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("GetExperiences", "Candidates", new { id = experience.CandidateCandidateId });
-                // return RedirectToAction(nameof(Index));
+                return RedirectToAction("GetExperiences", "Candidates", new { id = experience.CandidateCandidateId });                
             }
            // ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", experience.CandidateCandidateId);
             ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", experience.ClientDatabaseClientDatabaseId);
@@ -128,7 +127,6 @@ namespace JobPortalMVC.Controllers
             {
                 return NotFound();
             }
-
             var experience = await _context.Experiences
                 .Include(e => e.CandidateCandidate)
                 .Include(e => e.ClientDatabaseClientDatabase)

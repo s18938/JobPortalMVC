@@ -27,7 +27,7 @@ namespace JobPortalMVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<salesjobportalContext>(options =>
-                options.UseMySQL("Server=localhost; port=3306;Database=salesjobportal; user=root; password="));
+                options.UseMySQL(Configuration.GetConnectionString("Database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

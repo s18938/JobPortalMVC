@@ -77,8 +77,6 @@ namespace JobPortalMVC.Controllers
             return View(joboffercandidate);
         }
 
-        
-
         // GET: Joboffercandidates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -186,8 +184,7 @@ namespace JobPortalMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("GetCandidates", "JobOffers", new { id = joboffercandidate.JobOfferJobOfferId });
-               
+                return RedirectToAction("GetCandidates", "JobOffers", new { id = joboffercandidate.JobOfferJobOfferId });              
             }
             ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", joboffercandidate.CandidateCandidateId);
             ViewData["JobApliacationStateJobApliacationStateId"] = new SelectList(_context.Jobapliacationstates, "JobApliacationStateId", "Name", joboffercandidate.JobApliacationStateJobApliacationStateId);

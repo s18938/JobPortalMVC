@@ -25,13 +25,6 @@ namespace JobPortalMVC.Controllers
             return View(await salesjobportalContext.ToListAsync());
         }
 
-        //// GET: Candidates/MyCandidates/1
-        //public async Task<IActionResult> MyCandidates(int? id)
-        //{
-        //    var salesjobportalContext = _context.Candidates.Include(c => c.CityCity);
-        //    return View(await salesjobportalContext.ToListAsync());
-        //}
-
         // GET: Candidates/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -162,7 +155,6 @@ namespace JobPortalMVC.Controllers
         {
             return _context.Candidates.Any(e => e.CandidateId == id);
         }
-
 
         // GET: Candidates/GetJobOffers/5
         public async Task<IActionResult> GetJobOffers(int? id)

@@ -30,11 +30,49 @@ namespace JobPortalMVC.Controllers
         // GET: View
         public async Task<IActionResult> Main()
         {
-            var salesjobportalContext = _context.Joboffers.Include(j => j.CityCity).Include(j => j.ClientDatabaseClientDatabase).Include(j => j.ClientTypeClientType).Include(j => j.EmployerEmployer).Include(j => j.IndustryIndustry).Include(j => j.PositionPosition).Include(j => j.SalesCycleLengthSalesCycleLength).OrderBy(j=>j.StartDate);
+            ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName");
+            ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName");
+            ViewData["ClientTypeClientTypeId"] = new SelectList(_context.Clienttypes, "ClientTypeId", "ClientTypeName");
+            ViewData["EmployerEmployerId"] = new SelectList(_context.Employers, "EmployerId", "Email");
+            ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName");
+            ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName");
+            ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName");
+            ViewData["JobTypeJobTypeId"] = new SelectList(_context.Jobtypes, "JobTypeId", "JobTypeName");
+            var salesjobportalContext = _context.Joboffers.Include(j => j.CityCity).Include(j => j.ClientDatabaseClientDatabase).Include(j => j.ClientTypeClientType).Include(j => j.EmployerEmployer).Include(j => j.IndustryIndustry).Include(j => j.PositionPosition).Include(j => j.SalesCycleLengthSalesCycleLength).OrderByDescending(j=>j.StartDate);
             return View(await salesjobportalContext.ToListAsync());
         }
 
-   
+        // POST: Joboffers/Main
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Main([Bind("salaryMax")] int SalaryMax, [Bind("salaryMin")] int SalaryMin, [Bind("commissonMax")] int CommissonMax, [Bind("commissonMin")] int CommissonMin)
+        {
+            ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName");
+            ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName");
+            ViewData["ClientTypeClientTypeId"] = new SelectList(_context.Clienttypes, "ClientTypeId", "ClientTypeName");
+            ViewData["EmployerEmployerId"] = new SelectList(_context.Employers, "EmployerId", "Email");
+            ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName");
+            ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName");
+            ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName");
+            ViewData["JobTypeJobTypeId"] = new SelectList(_context.Jobtypes, "JobTypeId", "JobTypeName");
+                     
+            var salesjobportalList = _context.Joboffers.Include(j => j.CityCity).Include(j => j.ClientDatabaseClientDatabase)
+                .Include(j => j.ClientTypeClientType).Include(j => j.EmployerEmployer).Include(j => j.IndustryIndustry)
+                .Include(j => j.PositionPosition).Include(j => j.SalesCycleLengthSalesCycleLength).OrderByDescending(j => j.StartDate)
+                .Where(j => SalaryMax != 0 ? j.SalaryMax < SalaryMax : true)
+                    .Where(j => SalaryMin != 0 ? j.SalaryMin > SalaryMin : true)
+                    .Where(j => CommissonMax != 0 ? j.CommissonMax < CommissonMax : true)
+                    .Where(j => CommissonMin != 0 ? j.CommissonMin > CommissonMin : true);
+
+            return View(await salesjobportalList.ToListAsync());
+            
+           
+            //var salesjobportalContext = _context.Joboffers.Include(j => j.CityCity).Include(j => j.ClientDatabaseClientDatabase).Include(j => j.ClientTypeClientType).Include(j => j.EmployerEmployer).Include(j => j.IndustryIndustry).Include(j => j.PositionPosition).Include(j => j.SalesCycleLengthSalesCycleLength).OrderByDescending(j => j.StartDate);
+            //return View(await salesjobportalContext.ToListAsync());
+        }
+
         // GET: Joboffers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -61,12 +99,9 @@ namespace JobPortalMVC.Controllers
             //dynamic mymodel = new ExpandoObject();
             //mymodel.joboffer = jobofferContext;
             //mymodel.candidate = await _context.Candidates.FirstOrDefaultAsync();
-            //return View(mymodel);
-        
+            //return View(mymodel);       
             return View(jobofferContext);
         }
-
-
 
         // GET: Joboffers/GetCandidates/5
         public async Task<IActionResult> GetCandidates(int? id)
@@ -105,7 +140,24 @@ namespace JobPortalMVC.Controllers
             ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName");
             ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName");
             ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName");
-           
+            ViewData["JobTypeJobTypeId"] = new SelectList(_context.Jobtypes, "JobTypeId", "JobTypeName");
+            return View();
+        }
+
+
+
+
+        // GET: Joboffers/Createe
+        public IActionResult Createe()
+        {
+            ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName");
+            ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName");
+            ViewData["ClientTypeClientTypeId"] = new SelectList(_context.Clienttypes, "ClientTypeId", "ClientTypeName");
+            ViewData["EmployerEmployerId"] = new SelectList(_context.Employers, "EmployerId", "Email");
+            ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName");
+            ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName");
+            ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName");
+            ViewData["JobTypeJobTypeId"] = new SelectList(_context.Jobtypes, "JobTypeId", "JobTypeName");
             return View();
         }
 
@@ -114,14 +166,20 @@ namespace JobPortalMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("JobOfferId,Content,SalaryMax,SalaryMin,CommissonMin,CommissonMax,Title,CompanyCar,EmployerEmployerId,ClientDatabaseClientDatabaseId,IndustryIndustryId,ClientTypeClientTypeId,PositionPositionId,StartDate,EndDate,SalesCycleLengthSalesCycleLengthId,CityCityId")] Joboffer joboffer)
+        public async Task<IActionResult> Create([Bind("JobOfferId,Content,SalaryMax,SalaryMin,CommissonMin,CommissonMax,Title,CompanyCar,EmployerEmployerId,ClientDatabaseClientDatabaseId,IndustryIndustryId,ClientTypeClientTypeId,PositionPositionId,StartDate,EndDate,SalesCycleLengthSalesCycleLengthId,CityCityId")] Joboffer joboffer, [Bind("JobTypeJobTypeId")] Jobtype jobtype)
         {
             if (ModelState.IsValid)
-            {
+            {              
                 _context.Add(joboffer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Main", "Joboffers");
-                //return RedirectToAction(nameof(Index));
+                Jobtypejoboffer jobtypejoboffer = new Jobtypejoboffer()
+                {
+                    JobOfferJobOfferId = joboffer.JobOfferId,
+                    JobTypeJobTypeId = jobtype.JobTypeId
+                };
+                _context.Add(jobtypejoboffer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Main", "Joboffers");                
             }
             ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName", joboffer.CityCityId);
             ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", joboffer.ClientDatabaseClientDatabaseId);
@@ -130,38 +188,10 @@ namespace JobPortalMVC.Controllers
             ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName", joboffer.IndustryIndustryId);
             ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName", joboffer.PositionPositionId);
             ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName", joboffer.SalesCycleLengthSalesCycleLengthId);
+            
             return View(joboffer);
         }
-
-
-        // POST: Joboffers/Test
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Test([Bind("JobOfferId,Content,SalaryMax,SalaryMin,CommissonMin,CommissonMax,Title,CompanyCar,EmployerEmployerId,ClientDatabaseClientDatabaseId,IndustryIndustryId,ClientTypeClientTypeId,PositionPositionId,StartDate,EndDate,SalesCycleLengthSalesCycleLengthId,CityCityId")] Joboffer joboffer, [Bind("JobTypeJobOfferId,JobTypeId,JobOfferId")] Jobtypejoboffer jobtypejoboffer)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                joboffer.Jobtypejoboffers.Add(jobtypejoboffer);
-                _context.Add(joboffer);
-               // _context.Add(jobtypejoboffer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Main", "Joboffers");
-               // return RedirectToAction(nameof(Main));
-            }
-            ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName", joboffer.CityCityId);
-            ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", joboffer.ClientDatabaseClientDatabaseId);
-            ViewData["ClientTypeClientTypeId"] = new SelectList(_context.Clienttypes, "ClientTypeId", "ClientTypeName", joboffer.ClientTypeClientTypeId);
-            ViewData["EmployerEmployerId"] = new SelectList(_context.Employers, "EmployerId", "Email", joboffer.EmployerEmployerId);
-            ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName", joboffer.IndustryIndustryId);
-            ViewData["PositionPositionId"] = new SelectList(_context.Positions, "PositionId", "PositionName", joboffer.PositionPositionId);
-            ViewData["SalesCycleLengthSalesCycleLengthId"] = new SelectList(_context.Salescyclelengths, "SalesCycleLengthId", "SalesCycleLengthName", joboffer.SalesCycleLengthSalesCycleLengthId);
-            ViewData["JobTypeId"] = new SelectList(_context.Jobtypes, "JobTypeId", "JobTypeName");
-            return View(joboffer);
-        }
-
+   
         // GET: Joboffers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -215,8 +245,7 @@ namespace JobPortalMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("GetJobOffers", "Employers", new { id = joboffer.EmployerEmployerId });
-               // return RedirectToAction(nameof(Index));
+                return RedirectToAction("GetJobOffers", "Employers", new { id = joboffer.EmployerEmployerId });               
             }
             ViewData["CityCityId"] = new SelectList(_context.Cities, "CityId", "CityName", joboffer.CityCityId);
             ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", joboffer.ClientDatabaseClientDatabaseId);

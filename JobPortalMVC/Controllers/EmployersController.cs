@@ -68,9 +68,7 @@ namespace JobPortalMVC.Controllers
 
             return View(employer.Joboffers);
         }
-
-     
-
+   
         // GET: Employers/Create
         public IActionResult Create()
         {
@@ -139,8 +137,7 @@ namespace JobPortalMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Employers", new { id = employer.EmployerId });
-               // return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Employers", new { id = employer.EmployerId });             
             }
             return View(employer);
         }
