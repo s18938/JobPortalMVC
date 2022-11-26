@@ -20,12 +20,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label">Data rozpoczęcia</label>
-                <input asp-for="StartDate" class="form-control" />
+                <input asp-for="StartDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label">Data zakończenia</label>
-                <input asp-for="EndDate" class="form-control" />
+                <input asp-for="EndDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             @*<div class="form-group">

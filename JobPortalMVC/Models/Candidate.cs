@@ -34,7 +34,7 @@ namespace JobPortalMVC.Models
         public int? CityCityId { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [Phone]
+        
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Wpisz poprawny nr telefonu")]
         public int? TelNum { get; set; }
 

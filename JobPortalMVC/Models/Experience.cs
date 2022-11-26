@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobPortalMVC.Models
 {
-    public partial class Experience
+    public partial class Experience : IValidatableObject
     {
         public int ExperienceId { get; set; }
 
@@ -18,7 +18,7 @@ namespace JobPortalMVC.Models
         [Required(ErrorMessage = "To pole jest wymagane")]
         [Display(Name = "Data rozpoczęcia")]
         [DataType(DataType.Date, ErrorMessage ="Nieprawidłowa data")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
         [Display(Name = "Data zakończenia")]
@@ -37,5 +37,26 @@ namespace JobPortalMVC.Models
         public virtual Industry IndustryIndustry { get; set; }
         public virtual Position PositionPosition { get; set; }
         public virtual Salescyclelength SalesCycleLengthSalesCycleLength { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            DateTime defaultDate = new DateTime(0001, 01, 01);
+            
+            if (StartDate.Equals(defaultDate) )
+            {
+                yield return new ValidationResult(
+                        "To pole jest wymagane", new[] { nameof(StartDate) });
+            }
+            else if (EndDate.Equals(defaultDate))
+            {
+                yield return new ValidationResult(
+                        "To pole jest wymagane", new[] { nameof(EndDate) });
+            }
+            else if (StartDate > EndDate)
+            {
+                yield return new ValidationResult(
+                    "Data zakończenia nie może byc wcześniejsza niż data rozpoczęcia", new[] { nameof(EndDate) });
+            }
+        }
     }
 }

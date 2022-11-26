@@ -1,20 +1,21 @@
 ﻿@model JobPortalMVC.Models.Joboffer
 
+@*@model dynamic*@
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Utwórz</h1>
+<h1>Krok 1 z 2</h1>
 
 <h4>Ogłoszenie o pracę</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Tytuł</label>
-                <input asp-for="Title" class="form-control" />
+                <label  asp-for="Title" class="control-label">Tytuł</label>
+                <input  asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,7 +46,6 @@
 
             <div class="form-group form-check">
                 <label class="form-check-label">
-
                     <input class="form-check-input" asp-for="CompanyCar" /> Samochód firmowy
                 </label>
             </div>
@@ -70,8 +70,8 @@
                 <select asp-for="PositionPositionId" class="form-control" asp-items="ViewBag.PositionPositionId"></select>
             </div>
             <div class="form-group">
-                <label  class="control-label">Rodzaj pracy</label>
-                <select  class="form-control" asp-items="ViewBag.JobTypeJobTypeId" ></select>
+                <label class="control-label">Rodzaj pracy</label>
+                <select class="form-control" asp-items="ViewBag.JobTypeJobTypeId"></select>
             </div>
             <div hidden class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
@@ -80,7 +80,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label">Data zakończenia rekrutacji</label>
-                <input asp-for="EndDate" class="form-control" />
+                <input asp-for="EndDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -91,9 +91,23 @@
                 <label asp-for="CityCityId" class="control-label">Miasto</label>
                 <select asp-for="CityCityId" class="form-control" asp-items="ViewBag.CityCityId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-            </div>
+
+            @*<label asp-for="Jobtypejoboffers" class="control-label">Rodzaj pracy</label><br>
+            <div class="form-group form-check">
+                <input name="wyjazdowa" class="form-check-input" type="checkbox" >Wyjazdowa<br>
+                <input name="zdalna" class="form-check-input" type="checkbox">Zdalna<br>
+                <input name="stacjonarna" class="form-check-input" type="checkbox">Stacjonarna<br>
+                <br>
+            </div>*@
+
+            @*<label class="form-label">Rodzaj pracy</label>
+                <select class="form-control" asp-items="ViewBag.JobTypeJobTypeId" multiple></select>*@
+
+        <div class="form-group">
+            <input type="submit" value="Zapisz" class="btn btn-primary" />
+            @*<a asp-controller="Joboffers" asp-action="Create" asp-route-wyjazdowa="@dokument.get"  asp-route-zdalna=""  asp-route-stacjonarna="">Powrót</a>
+            @Html.ActionLink(@Resource.ButtonTitleAdd, "Add", "Configure", new { ipValue = "xxx", TypeId = "1" }, new { @class = "link" })*@
+        </div>
         </form>
     </div>
 </div>

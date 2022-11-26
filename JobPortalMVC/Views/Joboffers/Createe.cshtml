@@ -11,87 +11,89 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Createe">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label  class="control-label">Tytuł</label>
-                <input  class="form-control"  />
-                <span  class="text-danger"></span>
+                <label class="control-label" for="@Model.jobOffer.Title">Tytuł </label>
+                <input class="form-control" for="Title" />
+                <span class="text-danger" for="@Model.jobOffer.Title"></span>
             </div>
-            <div class="form-group">
-                <label  class="control-label">Treść</label>
-                <textarea style="height:500px"  class="form-control"></textarea>
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Pensja max</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Pensja min</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Premia min</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Premia max</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label  class="control-label">Treść</label>
+            <textarea style="height:500px"  class="form-control"></textarea>
+            <span  class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Pensja max</label>
+            <input  class="form-control" />
+            <span  class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Pensja min</label>
+            <input  class="form-control" />
+            <span  class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Premia min</label>
+            <input  class="form-control" />
+            <span  class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Premia max</label>
+            <input  class="form-control" />
+            <span  class="text-danger"></span>
+        </div>
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
+        <div class="form-group form-check">
+            <label class="form-check-label">
 
-                    <input class="form-check-input"  /> Samochód firmowy
-                </label>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Pracodawca</label>
-                <select  class="form-control" asp-items="ViewBag.EmployerEmployerId"></select>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Baza leadów</label>
-                <select  class="form-control" asp-items="ViewBag.ClientDatabaseClientDatabaseId"></select>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Branża</label>
-                <select  class="form-control" asp-items="ViewBag.IndustryIndustryId"></select>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Typ klienta</label>
-                <select  class="form-control" asp-items="ViewBag.ClientTypeClientTypeId"></select>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Stanowisko</label>
-                <select  class="form-control" asp-items="ViewBag.PositionPositionId"></select>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Rodzaj pracy</label>
-                <select  class="form-control" asp-items="ViewBag.JobTypeJobTypeId" multiple></select>
-            </div>
-            <div hidden class="form-group">
-                <label  class="control-label"></label>
-                <input  value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Data zakończenia rekrutacji</label>
-                <input  class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Dł. cyklu sprzedażowego</label>
-                <select  class="form-control" asp-items="ViewBag.SalesCycleLengthSalesCycleLengthId"></select>
-            </div>
-            <div class="form-group">
-                <label  class="control-label">Miasto</label>
-                <select  class="form-control" asp-items="ViewBag.CityCityId"></select>
-            </div>
+                <input class="form-check-input"  /> Samochód firmowy
+            </label>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Pracodawca</label>
+            <select  class="form-control" asp-items="ViewBag.EmployerEmployerId"></select>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Baza leadów</label>
+            <select  class="form-control" asp-items="ViewBag.ClientDatabaseClientDatabaseId"></select>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Branża</label>
+            <select  class="form-control" asp-items="ViewBag.IndustryIndustryId"></select>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Typ klienta</label>
+            <select  class="form-control" asp-items="ViewBag.ClientTypeClientTypeId"></select>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Stanowisko</label>
+            <select  class="form-control" asp-items="ViewBag.PositionPositionId"></select>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Rodzaj pracy</label>
+            <select  class="form-control" asp-items="ViewBag.JobTypeJobTypeId" multiple></select>
+        </div>
+        <div hidden class="form-group">
+            <label  class="control-label"></label>
+            <input  value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
+            <span  class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Data zakończenia rekrutacji</label>
+            <input  class="form-control" />
+            <span  class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Dł. cyklu sprzedażowego</label>
+            <select  class="form-control" asp-items="ViewBag.SalesCycleLengthSalesCycleLengthId"></select>
+        </div>*@
+            @*<div class="form-group">
+            <label  class="control-label">Miasto</label>
+            <select  class="form-control" asp-items="ViewBag.CityCityId"></select>
+        </div>*@
+            <label class="form-label">Rodzaj pracy</label>
+            <select class="form-control" for="@Model.jobType" asp-items="ViewBag.JobTypeJobTypeId" multiple></select>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>

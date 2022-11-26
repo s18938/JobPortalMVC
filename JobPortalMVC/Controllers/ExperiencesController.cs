@@ -47,7 +47,8 @@ namespace JobPortalMVC.Controllers
                 return RedirectToAction("GetExperiences", "Candidates", new { id = experience.CandidateCandidateId });
             
             }
-            ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", experience.CandidateCandidateId);
+           
+            //ViewData["CandidateCandidateId"] = new SelectList(_context.Candidates, "CandidateId", "Email", experience.CandidateCandidateId);
             ViewData["ClientDatabaseClientDatabaseId"] = new SelectList(_context.Clientdatabases, "ClientDatabaseId", "ClientDatabaseName", experience.ClientDatabaseClientDatabaseId);
             ViewData["ClientTypeClientTypeId"] = new SelectList(_context.Clienttypes, "ClientTypeId", "ClientTypeName", experience.ClientTypeClientTypeId);
             ViewData["IndustryIndustryId"] = new SelectList(_context.Industries, "IndustryId", "IndustryName", experience.IndustryIndustryId);
@@ -84,17 +85,16 @@ namespace JobPortalMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ExperienceId,CompanyName,StartDate,EndDate,ClientDatabaseClientDatabaseId,IndustryIndustryId,ClientTypeClientTypeId,PositionPositionId,SalesCycleLengthSalesCycleLengthId")] Experience experience)
-        {
+        {         
             if (id != experience.ExperienceId)
             {
                 return NotFound();
             }
-
+            experience.CandidateCandidateId = 2;
             if (ModelState.IsValid)
             {
                 try
-                {
-                    experience.CandidateCandidateId = 2;
+                {                    
                     _context.Update(experience);
                     await _context.SaveChangesAsync();
                 }

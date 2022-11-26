@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobPortalMVC.Models
 {
-    public partial class Joboffer
+    public partial class Joboffer 
     {
         public Joboffer()
         {
@@ -69,5 +69,7 @@ namespace JobPortalMVC.Models
         public virtual Salescyclelength SalesCycleLengthSalesCycleLength { get; set; }
         public virtual ICollection<Joboffercandidate> Joboffercandidates { get; set; }
         public virtual ICollection<Jobtypejoboffer> Jobtypejoboffers { get; set; }
+
+       
     }
 }

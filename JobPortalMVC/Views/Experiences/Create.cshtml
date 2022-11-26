@@ -19,22 +19,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label">Data rozpoczęcia</label>
-                <input asp-for="StartDate" class="form-control" />
+                <input asp-for="StartDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label">Data zakończenia</label>
-                <input asp-for="EndDate" class="form-control" />
+                <input asp-for="EndDate" max="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
+
+
+            <div class="form-group" style="display: none;">
+            <label asp-for="CandidateCandidateId" class="control-label">Kandydat</label>
+            <select asp-for="CandidateCandidateId" class="form-control" asp-items="ViewBag.CandidateCandidateId" value="@ViewBag.CandidateId"></select>
+        </div>
             @*<div class="form-group">
-                <label asp-for="CandidateCandidateId" class="control-label">Kandydat</label>
-                <select asp-for="CandidateCandidateId" class="form-control" asp-items="ViewBag.CandidateCandidateId" value="@ViewBag.CandidateId"></select>
-            </div>*@
-            @*<div class="form-group">
-                <label asp-for="CandidateCandidateId" class="control-label">Kandydat</label>
-                <select asp-for="CandidateCandidateId" class="form-control" asp-items="ViewBag.CandidateId" value="@ViewBag.CandidateId"></select>
-            </div>*@
+            <label asp-for="CandidateCandidateId" class="control-label">Kandydat</label>
+            <select asp-for="CandidateCandidateId" class="form-control" asp-items="ViewBag.CandidateId" value="@ViewBag.CandidateId"></select>
+        </div>*@
             <div class="form-group">
                 <label asp-for="ClientDatabaseClientDatabaseId" class="control-label">Baza klientów</label>
                 <select asp-for="ClientDatabaseClientDatabaseId" class="form-control" asp-items="ViewBag.ClientDatabaseClientDatabaseId"></select>
